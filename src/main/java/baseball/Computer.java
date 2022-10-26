@@ -9,10 +9,12 @@ public class Computer {
     static final int digits = 3;
 
     void startGame() {
-//        System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
+        System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
         this.resetTargetNumber();
-//        System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
-        if (compareInputWithTarget()) {
+        System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
+        compareInputWithTarget();
+        boolean checkRestart = checkRestart();
+        if(checkRestart) {
             startGame();
         };
     }
@@ -39,7 +41,7 @@ public class Computer {
         return intArray;
     }
 
-    boolean compareInputWithTarget() {
+    void compareInputWithTarget() {
         int[] input = getInput();
         int strikes = checkStrikes(input);
         int ballsIncludeStrikes = checkBallsIncludeStrikes(input);
@@ -48,8 +50,7 @@ public class Computer {
         if (checkEnd(strikes) == false) {
             compareInputWithTarget();
         }
-        boolean checkRestart = checkRestart();
-        return checkRestart;
+
     }
 
     int checkStrikes(int[] input) {
@@ -124,6 +125,7 @@ public class Computer {
     boolean checkRestart() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         String input = Console.readLine();
+//        System.out.println(input);
         if (input.equals("1")) {
             return true;
         }
