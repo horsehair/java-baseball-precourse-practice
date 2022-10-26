@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Computer {
     int[] targetNumber = new int[3];
+    static final int digits = 3;
 
     void startGame() {
         System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
@@ -15,7 +16,7 @@ public class Computer {
     }
 
     void resetTargetNumber() {
-        for (int i = 0; i < targetNumber.length; i++) {
+        for (int i = 0; i < digits; i++) {
             targetNumber[i] = Randoms.pickNumberInRange(1, 9);
         }
     }
@@ -29,7 +30,7 @@ public class Computer {
     int[] convertStringToIntArray(String numberString) {
         char[] charArray = numberString.toCharArray();
         int[] intArray = new int[3];
-        for (int i = 0; i < charArray.length; i++) {
+        for (int i = 0; i < digits; i++) {
             intArray[i] = Character.getNumericValue(charArray[i]);
         }
         return intArray;
