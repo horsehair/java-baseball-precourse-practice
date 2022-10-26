@@ -24,6 +24,7 @@ public class Computer {
     }
 
     int[] getInput() {
+        System.out.print("숫자를 입력해주세요 : ");
         String input = Console.readLine();
         int[] inputIntArray = convertStringToIntArray(input);
         return inputIntArray;
@@ -42,7 +43,7 @@ public class Computer {
         int strikes = checkStrikes(input);
         int ballsIncludeStrikes = checkBallsIncludeStrikes(input);
         int balls = ballsIncludeStrikes - strikes;
-        System.out.println(strikes + "스트라이크" + " " + balls + "볼");
+        returnResult(strikes, balls);
     }
 
     int checkStrikes(int[] input) {
@@ -75,5 +76,34 @@ public class Computer {
             return 1;
         }
         return 0;
+    }
+
+    void returnResult(int strikes, int balls) {
+        String checkReuslt = checkResult(strikes, balls);
+        if (checkReuslt == "낫싱") {
+            System.out.println("낫싱");
+        }
+        if (checkReuslt == "스트라이크만") {
+            System.out.println(strikes + "스트라이크");
+        }
+        if (checkReuslt == "볼만") {
+            System.out.println(balls + "볼");
+        }
+        if (checkReuslt == "둘다") {
+            System.out.println(balls + "볼 " + strikes + "스트라이크");
+        }
+    }
+
+    String checkResult(int strikes, int balls) {
+        if (strikes == 0 && balls == 0) {
+            return "낫싱";
+        }
+        if (balls == 0) {
+            return "스트라이크만";
+        }
+        if (strikes == 0) {
+            return "볼만";
+        }
+        return "둘다";
     }
 }
