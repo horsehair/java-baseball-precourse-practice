@@ -2,9 +2,7 @@ package baseball;
 import camp.nextstep.edu.missionutils.Randoms;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Computer {
     int[] targetNumber = new int[3];
@@ -14,7 +12,7 @@ public class Computer {
         System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
         this.resetTargetNumber();
         System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
-        compareInputWithTarget(getInput());
+        compareInputWithTarget();
     }
 
     void resetTargetNumber() {
@@ -39,11 +37,15 @@ public class Computer {
         return intArray;
     }
 
-    void compareInputWithTarget(int[] input) {
+    void compareInputWithTarget() {
+        int[] input = getInput();
         int strikes = checkStrikes(input);
         int ballsIncludeStrikes = checkBallsIncludeStrikes(input);
         int balls = ballsIncludeStrikes - strikes;
         returnResult(strikes, balls);
+        if (checkEnd(strikes) == false) {
+            compareInputWithTarget();
+        }
     }
 
     int checkStrikes(int[] input) {
@@ -105,5 +107,13 @@ public class Computer {
             return "볼만";
         }
         return "둘다";
+    }
+
+    boolean checkEnd(int strikes) {
+        if (strikes != 3) {
+            return false;
+        }
+        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        return true;
     }
 }
