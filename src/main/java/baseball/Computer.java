@@ -9,10 +9,12 @@ public class Computer {
     static final int digits = 3;
 
     void startGame() {
-        System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
+//        System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
         this.resetTargetNumber();
-        System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
-        compareInputWithTarget();
+//        System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
+        if (compareInputWithTarget()) {
+            startGame();
+        };
     }
 
     void resetTargetNumber() {
@@ -37,7 +39,7 @@ public class Computer {
         return intArray;
     }
 
-    void compareInputWithTarget() {
+    boolean compareInputWithTarget() {
         int[] input = getInput();
         int strikes = checkStrikes(input);
         int ballsIncludeStrikes = checkBallsIncludeStrikes(input);
@@ -46,6 +48,8 @@ public class Computer {
         if (checkEnd(strikes) == false) {
             compareInputWithTarget();
         }
+        boolean checkRestart = checkRestart();
+        return checkRestart;
     }
 
     int checkStrikes(int[] input) {
@@ -81,17 +85,17 @@ public class Computer {
     }
 
     void returnResult(int strikes, int balls) {
-        String checkReuslt = checkResult(strikes, balls);
-        if (checkReuslt == "낫싱") {
+        String checkResult = checkResult(strikes, balls);
+        if (checkResult.equals("낫싱")) {
             System.out.println("낫싱");
         }
-        if (checkReuslt == "스트라이크만") {
+        if (checkResult.equals("스트라이크만")) {
             System.out.println(strikes + "스트라이크");
         }
-        if (checkReuslt == "볼만") {
+        if (checkResult.equals("볼만")) {
             System.out.println(balls + "볼");
         }
-        if (checkReuslt == "둘다") {
+        if (checkResult.equals("둘다")) {
             System.out.println(balls + "볼 " + strikes + "스트라이크");
         }
     }
@@ -116,4 +120,14 @@ public class Computer {
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         return true;
     }
+
+    boolean checkRestart() {
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        String input = Console.readLine();
+        if (input.equals("1")) {
+            return true;
+        }
+        return false;
+    }
+
 }
