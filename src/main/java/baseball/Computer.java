@@ -2,7 +2,9 @@ package baseball;
 import camp.nextstep.edu.missionutils.Randoms;
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Computer {
     int[] targetNumber = new int[3];
@@ -12,7 +14,7 @@ public class Computer {
         System.out.println("before: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
         this.resetTargetNumber();
         System.out.println("after: " + targetNumber[0]+targetNumber[1]+targetNumber[2]);
-        System.out.println(Arrays.toString(getInput()));
+        compareInputWithTarget(getInput());
     }
 
     void resetTargetNumber() {
@@ -34,5 +36,44 @@ public class Computer {
             intArray[i] = Character.getNumericValue(charArray[i]);
         }
         return intArray;
+    }
+
+    void compareInputWithTarget(int[] input) {
+        int strikes = checkStrikes(input);
+        int ballsIncludeStrikes = checkBallsIncludeStrikes(input);
+        int balls = ballsIncludeStrikes - strikes;
+        System.out.println(strikes + "스트라이크" + " " + balls + "볼");
+    }
+
+    int checkStrikes(int[] input) {
+        int strikes = 0;
+        for (int i = 0; i < digits; i++) {
+            strikes += returnIntOfSameOrNot(input[i], targetNumber[i]);
+        }
+        return strikes;
+    }
+
+    int checkBallsIncludeStrikes(int[] input) {
+        int ballsIncludeStrikes = 0;
+        for (int i = 0; i < digits; i++) {
+            ballsIncludeStrikes += returnIntoOfIncludeOrNot(input[i], targetNumber);
+        }
+        return ballsIncludeStrikes;
+    }
+
+    int returnIntOfSameOrNot(int a, int b) {
+        if (a == b) {
+            return 1;
+        }
+        return 0;
+    }
+
+    int returnIntoOfIncludeOrNot(int a, int[] b) {
+        boolean isIncluded = Arrays.stream(b)
+            .anyMatch(num -> num == a);
+        if (isIncluded) {
+            return 1;
+        }
+        return 0;
     }
 }
