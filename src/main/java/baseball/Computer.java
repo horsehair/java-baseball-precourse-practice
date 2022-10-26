@@ -20,9 +20,22 @@ public class Computer {
     }
 
     void resetTargetNumber() {
-        for (int i = 0; i < digits; i++) {
-            targetNumber[i] = Randoms.pickNumberInRange(1, 9);
+        targetNumber[0] = Randoms.pickNumberInRange(1, 9);
+        while(true) {
+            int temp = Randoms.pickNumberInRange(1, 9);
+            if (temp != targetNumber[0]) {
+                targetNumber[1] = temp;
+                break;
+            }
         }
+        while(true) {
+            int temp = Randoms.pickNumberInRange(1, 9);
+            if (temp != targetNumber[0] && temp != targetNumber[1]) {
+                targetNumber[2] = temp;
+                break;
+            }
+        }
+
     }
 
     int[] getInput() {
@@ -50,7 +63,6 @@ public class Computer {
         if (checkEnd(strikes) == false) {
             compareInputWithTarget();
         }
-
     }
 
     int checkStrikes(int[] input) {
