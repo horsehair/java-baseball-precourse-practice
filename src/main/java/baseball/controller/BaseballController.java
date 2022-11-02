@@ -20,8 +20,19 @@ public class BaseballController {
 		}
 		Result result = this.baseballService.playGameOneTime(stringOfNumberFromClient);
 		boolean isGameOver = this.baseballService.checkIsGameOver(result);
+		if (isGameOver) {
+			this.checkRestartGame();
+			return;
+		}
 		String resultString = this.baseballService.getResultString(result);
 		String newStringOfNumberFromClient = this.baseballView.repeatGame(resultString);
 		playGameOneTime(newStringOfNumberFromClient);
+	}
+
+	void checkRestartGame() {
+		String oneForRestartGameOrTwo = this.baseballView.checkRestartGame();
+		if (oneForRestartGameOrTwo.equals("1")) {
+			this.startGame();
+		}
 	}
 }
