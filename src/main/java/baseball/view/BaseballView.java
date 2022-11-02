@@ -9,6 +9,6 @@ public class BaseballView {
 	public void getStringOfNumberFromClient() {
 		System.out.print("숫자를 입력해주세요 : ");
 		String stringOfNumberFromClient = Console.readLine();
-		this.baseballController.continueGame(stringOfNumberFromClient);
+		this.baseballController.playGameOneTime(stringOfNumberFromClient);
 	}
 }

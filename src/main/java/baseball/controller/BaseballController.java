@@ -7,8 +7,12 @@ public class BaseballController {
 	private BaseballService baseballService = new BaseballService();
 	private BaseballView baseballView = new BaseballView();
 
-	void startGame() {
+	public void startGame() {
 		this.baseballService.startGame();
-		this.baseballView.startGame();
+		this.baseballView.getStringOfNumberFromClient();
+	}
+
+	public void playGameOneTime(String stringOfNumberFromClient) {
+		this.baseballService.playGameOneTime(stringOfNumberFromClient);
 	}
 }
