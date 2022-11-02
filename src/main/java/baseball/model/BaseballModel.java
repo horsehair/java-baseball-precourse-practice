@@ -1,11 +1,13 @@
 package baseball.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class BaseballModel {
-	private List<Integer> targetNumberList;
+	private List<Integer> targetNumberList = new ArrayList<>(Arrays.asList(0, 0, 0));
 
 	public void setTargetNumberList() {
 		for (int i = 0; i < 3; i++) {

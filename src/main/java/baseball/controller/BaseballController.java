@@ -1,7 +1,6 @@
 package baseball.controller;
 
 import baseball.service.BaseballService;
-import baseball.service.Result;
 import baseball.view.BaseballView;
 
 public class BaseballController {
@@ -10,10 +9,16 @@ public class BaseballController {
 
 	public void startGame() {
 		this.baseballService.startGame();
-		this.baseballView.getStringOfNumberFromClient();
+		String stringOfNumberFromClient = this.baseballView.getStringOfNumberFromClient();
+		this.playGameOneTime(stringOfNumberFromClient);
 	}
 
 	public void playGameOneTime(String stringOfNumberFromClient) {
-		this.baseballService.playGameOneTime(stringOfNumberFromClient);
+		if (stringOfNumberFromClient.equals("종료")) {
+			return;
+		}
+		String resultString = this.baseballService.playGameOneTime(stringOfNumberFromClient);
+		String newStringOfNumberFromClient = this.baseballView.repeatGame(resultString);
+		playGameOneTime(newStringOfNumberFromClient);
 	}
 }
