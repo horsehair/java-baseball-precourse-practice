@@ -18,7 +18,8 @@ public class BaseballController {
 		this.playGameOneTime(stringOfNumberFromClient);
 	}
 
-	public void playGameOneTime(String stringOfNumberFromClient) {
+	public void playGameOneTime(String stringOfNumberFromClient) throws IllegalArgumentException {
+		this.validateInput(stringOfNumberFromClient);
 		Result result = this.baseballService.playGameOneTime(stringOfNumberFromClient);
 		String resultString = this.baseballService.getResultString(result);
 		this.baseballView.printResult(resultString);
@@ -35,6 +36,12 @@ public class BaseballController {
 		String stringOneOrTwoForCheckRestartGame = this.baseballView.checkRestartGame();
 		if (stringOneOrTwoForCheckRestartGame.equals("1")) {
 			this.startGame();
+		}
+	}
+
+	void validateInput(String input) throws IllegalArgumentException{
+		if (input.length() != 3) {
+			throw new IllegalArgumentException("3자리 숫자를 입력해야 합니다.");
 		}
 	}
 }
