@@ -30,11 +30,6 @@ public class Result {
 		int strikes = this.strikes;
 		String resultString;
 
-		if (strikes == 3) {
-			resultString = "3개의 숫자를 모두 맞히셨습니다!";
-			return resultString;
-		}
-
 		if (balls == 0 && strikes == 0) {
 			resultString = "낫싱";
 			return resultString;

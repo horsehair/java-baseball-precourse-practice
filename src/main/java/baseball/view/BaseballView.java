@@ -11,8 +11,11 @@ public class BaseballView {
 		return stringOfNumberFromClient;
 	}
 
-	public String repeatGame(String resultString) {
+	public void printResult(String resultString) {
 		System.out.println(resultString);
+	}
+
+	public String repeatGame() {
 		String stringOfNumberFromClient = this.getStringOfNumberFromClient();
 		return stringOfNumberFromClient;
 	}

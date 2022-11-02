@@ -8,6 +8,10 @@ public class BaseballController {
 	private BaseballService baseballService = new BaseballService();
 	private BaseballView baseballView = new BaseballView();
 
+	public BaseballController() {
+		System.out.println("숫자 야구 게임을 시작합니다.");
+	}
+
 	public void startGame() {
 		this.baseballService.startGame();
 		String stringOfNumberFromClient = this.baseballView.getStringOfNumberFromClient();
@@ -16,13 +20,14 @@ public class BaseballController {
 
 	public void playGameOneTime(String stringOfNumberFromClient) {
 		Result result = this.baseballService.playGameOneTime(stringOfNumberFromClient);
+		String resultString = this.baseballService.getResultString(result);
+		this.baseballView.printResult(resultString);
 		boolean isGameOver = this.baseballService.checkIsGameOver(result);
 		if (isGameOver) {
 			this.checkRestartGame();
 			return;
 		}
-		String resultString = this.baseballService.getResultString(result);
-		String newStringOfNumberFromClient = this.baseballView.repeatGame(resultString);
+		String newStringOfNumberFromClient = this.baseballView.repeatGame();
 		playGameOneTime(newStringOfNumberFromClient);
 	}
 
