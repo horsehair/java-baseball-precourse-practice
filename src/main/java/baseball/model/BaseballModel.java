@@ -10,10 +10,11 @@ public class BaseballModel {
 	private List<Integer> targetNumberList = new ArrayList<>(Arrays.asList(0, 0, 0));
 
 	public void setTargetNumberList() {
+		this.targetNumberList = new ArrayList<>(Arrays.asList(0, 0, 0));
 		for (int indexOfList = 0; indexOfList < 3; indexOfList++) {
 			setTargetNumber(indexOfList);
 		}
-		System.out.println(this.targetNumberList);
+		System.out.println("너만 알려줄게~ 비밀이야 (테스트용): " + this.targetNumberList);
 	}
 
 	void setTargetNumber(int indexOfList) {
@@ -21,7 +22,6 @@ public class BaseballModel {
 		int randomNumber = 0;
 		while (isInTargetNumberList) {
 			randomNumber = Randoms.pickNumberInRange(1, 9);
-			System.out.println(randomNumber);
 			isInTargetNumberList = checkIsNumberInTargetList(randomNumber);
 		}
 		targetNumberList.set(indexOfList, randomNumber);
