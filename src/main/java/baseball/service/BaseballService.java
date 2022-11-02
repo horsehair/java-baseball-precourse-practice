@@ -13,9 +13,9 @@ public class BaseballService {
 		this.baseballModel.setTargetNumberList();
 	}
 
-	public Object playGameOneTime(String stringOfNumberFromClient) {
+	public Result playGameOneTime(String stringOfNumberFromClient) {
 		List<Integer> clientNumberList = this.convertStringToIntegerList(stringOfNumberFromClient);
-		Object resultOfGame = this.calculateResultOfGame(clientNumberList);
+		Result resultOfGame = this.calculateResultOfGame(clientNumberList);
 		return resultOfGame;
 	}
 
@@ -24,5 +24,45 @@ public class BaseballService {
 			.map(Integer::new)
 			.collect(Collectors.toList());
 		return integerList;
+	}
+
+	Result calculateResultOfGame(List<Integer> clientNumberList) {
+		Result result = new Result();
+		for (int indexOfClientNumberList = 0; indexOfClientNumberList < 3; indexOfClientNumberList++) {
+			int numberToCompare = clientNumberList.get(indexOfClientNumberList);
+			this.addResultOfCompareOneDigitWithTargetToResult(numberToCompare, indexOfClientNumberList, result);
+		}
+		return result;
+	}
+
+	void addResultOfCompareOneDigitWithTargetToResult(int numberToCompare, int indexOfClientNumberList, Result result) {
+		boolean isStrike = checkIsStrike(numberToCompare, indexOfClientNumberList);
+		if (isStrike) {
+			result.addStrikes();
+			return;
+		}
+		boolean isNumberInTargetList = checkNumberInTargetList(numberToCompare);
+		if (isNumberInTargetList) {
+			result.addBalls();
+		}
+		return;
+	}
+
+	boolean checkIsStrike(int numberToCompare, int indexOfClientNumberList) {
+		List<Integer> targetNumberList = this.baseballModel.getTargetNumberList();
+		int targetNumberToCompare = targetNumberList.get(indexOfClientNumberList);
+		if (numberToCompare == targetNumberToCompare) {
+			return true;
+		}
+		return false;
+	}
+
+	boolean checkNumberInTargetList(int numberToCompare) {
+		List<Integer> targetNumberList = this.baseballModel.getTargetNumberList();
+		boolean isNumberInTargetList = targetNumberList.contains(numberToCompare);
+		if (isNumberInTargetList) {
+			return true;
+		}
+		return false;
 	}
 }
