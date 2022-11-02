@@ -7,14 +7,14 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class BaseballModel {
 	private List<Integer> targetNumberList;
 
-	void setTargetNumberList() {
+	public void setTargetNumberList() {
 		for (int i = 0; i < 3; i++) {
 			int randomNumber = Randoms.pickNumberInRange(1, 9);
 			targetNumberList.set(i, randomNumber);
 		}
 	}
 
-	List<Integer> getTargetNumberList() {
+	public List<Integer> getTargetNumberList() {
 		return this.targetNumberList;
 	}
 }

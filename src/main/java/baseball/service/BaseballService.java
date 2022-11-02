@@ -5,7 +5,7 @@ import baseball.model.BaseballModel;
 public class BaseballService {
 	private BaseballModel baseballModel = new BaseballModel();
 
-	void startGame() {
-		this.baseballModel.setTargetNumber();
+	public void startGame() {
+		this.baseballModel.setTargetNumberList();
 	}
 }
