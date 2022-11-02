@@ -25,10 +25,15 @@ public class Result {
 		this.strikes += 1;
 	}
 
-	String getResultString(Result resultOfGame) {
+	public String getResultString() {
 		int balls = this.balls;
 		int strikes = this.strikes;
 		String resultString;
+
+		if (strikes == 3) {
+			resultString = "3개의 숫자를 모두 맞히셨습니다!";
+			return resultString;
+		}
 
 		if (balls == 0 && strikes == 0) {
 			resultString = "낫싱";
@@ -44,5 +49,12 @@ public class Result {
 		}
 		resultString = String.format("%d볼 %d스트라이크", balls, strikes);
 		return resultString;
+	}
+
+	boolean checkIsGameOver() {
+		if (this.strikes == 3) {
+			return true;
+		}
+		return false;
 	}
 }

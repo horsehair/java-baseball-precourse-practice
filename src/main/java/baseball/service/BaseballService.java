@@ -13,11 +13,10 @@ public class BaseballService {
 		this.baseballModel.setTargetNumberList();
 	}
 
-	public String playGameOneTime(String stringOfNumberFromClient) {
+	public Result playGameOneTime(String stringOfNumberFromClient) {
 		List<Integer> clientNumberList = this.convertStringToIntegerList(stringOfNumberFromClient);
 		Result resultOfGame = this.calculateResultOfGame(clientNumberList);
-		String resultToView = resultOfGame.getResultString(resultOfGame);
-		return resultToView;
+		return resultOfGame;
 	}
 
 	List<Integer> convertStringToIntegerList(String stringOfNumber) {
@@ -65,6 +64,14 @@ public class BaseballService {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean checkIsGameOver(Result result) {
+		return result.checkIsGameOver();
+	}
+
+	public String getResultString(Result result) {
+		return result.getResultString();
 	}
 
 
